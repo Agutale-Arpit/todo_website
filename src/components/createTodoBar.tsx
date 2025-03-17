@@ -1,5 +1,5 @@
 export default function CreateTodoBar() {
   return (
-    <div>Create Todo Bar</div>
+    <div className="h-1/5 bg-green-100">Create Todo Bar</div>
   )
 }

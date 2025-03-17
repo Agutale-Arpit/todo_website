@@ -17,19 +17,19 @@ export default async function Page() {
   }
 
   return (
-    <div>
+    <div className="h-screen">
       <div>
         <Navbar />
       </div>
-      <div className="flex">
+      <div className="h-full flex w-full">
         <Sidebar />
-        <div>
+        <div className="flex flex-col w-full">
           <CreateTodoBar />
           <DisplayTodos />
         </div>
       </div>
-      <SignOut />
-      <UserAvatar />
+      {/* <SignOut /> */}
+      {/* <UserAvatar /> */}
     </div>
   )
 }

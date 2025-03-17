@@ -1,5 +1,5 @@
 export default function Sidebar() {
   return (
-    <div>Sidebar</div>
+    <div className="flex w-1/5 bg-blue-100">Sidebar</div>
   )
 }
