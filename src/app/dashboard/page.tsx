@@ -6,7 +6,7 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import Navbar from "@/components/Navbar";
 import Sidebar from "@/components/Sidebar";
-import CreateTodoBar from "@/components/createTodoBar";
+import CreateTodoBar from "@/components/CreateTodoBar";
 import DisplayTodos from "@/components/DisplayTodos";
 
 export default async function Page() {
