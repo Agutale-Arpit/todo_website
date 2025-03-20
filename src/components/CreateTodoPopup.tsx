@@ -10,6 +10,8 @@ import {
 } from "@/components/ui/dialog"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import { createPost } from "@/lib/actions";
+import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 
 export function CreateTodoPopup() {
   return (
@@ -18,8 +20,11 @@ export function CreateTodoPopup() {
         <Button variant="outline">Edit Profile</Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
+        <VisuallyHidden>
+          <DialogTitle>Title</DialogTitle>
+        </VisuallyHidden>
 
-        <form className="grid gap-4 py-4">
+        <form action={createPost} className="grid gap-4 py-4">
           <div className="grid grid-cols-4 items-center gap-4">
             <Label htmlFor="title" className="text-right">Title</Label>
             <Input id="title" name="title" placeholder="Enter title" className="col-span-3" />
@@ -27,7 +32,7 @@ export function CreateTodoPopup() {
 
           <div className="grid grid-cols-4 items-center gap-4">
             <Label htmlFor="content" className="text-right">Content</Label>
-            <Input id="content" name="content" placeholder="Enter content" className="col-span-3" />
+            <Input id="description" name="description" placeholder="Enter content" className="col-span-3" />
           </div>
 
           <div className="grid grid-cols-4 items-center gap-4">
