@@ -28,7 +28,7 @@ export default async function Page() {
           <DisplayTodos />
         </div>
       </div>
-      {/* <SignOut /> */}
+      <SignOut />
       {/* <UserAvatar /> */}
     </div>
   )
