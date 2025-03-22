@@ -9,10 +9,9 @@ import { Input } from "./ui/input";
 import DeleteButton from "./DeleteButton";
 
 const prisma = new PrismaClient();
+const session = await auth();
 
 export default async function DisplayTodos() {
-
-  const session = await auth();
 
   const data = await prisma.todos.findMany({
     where: {
@@ -21,7 +20,7 @@ export default async function DisplayTodos() {
   })
 
   return (
-    <div className="h-4/5 bg-yellow-100">
+    <div className="h-5/6">
       <div className="flex">
         {data.map((post) => (
           <Dialog key={post.id}>

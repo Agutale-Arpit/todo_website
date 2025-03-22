@@ -8,6 +8,7 @@ import Navbar from "@/components/Navbar";
 import Sidebar from "@/components/Sidebar";
 import CreateTodoBar from "@/components/CreateTodoBar";
 import DisplayTodos from "@/components/DisplayTodos";
+import { Separator } from "@/components/ui/separator";
 
 export default async function Page() {
   const session = await auth()
@@ -17,18 +18,23 @@ export default async function Page() {
   }
 
   return (
-    <div className="h-screen">
+    <div className="h-screen bg-[#1b1b1b]">
       <div>
         <Navbar />
       </div>
+      <Separator className="bg-gray-500 my-2" />
       <div className="h-full flex w-full">
         <Sidebar />
+        <Separator orientation="vertical" className="bg-gray-500 mx-2" />
         <div className="flex flex-col w-full">
           <CreateTodoBar />
+          <Separator className="bg-gray-500 my-2" />
           <DisplayTodos />
         </div>
       </div>
-      <SignOut />
+      <div>
+        <SignOut />
+      </div>
       {/* <UserAvatar /> */}
     </div>
   )

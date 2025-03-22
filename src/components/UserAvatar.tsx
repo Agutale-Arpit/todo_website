@@ -9,7 +9,9 @@ export default async function UserAvatar() {
 
   return (
     <div>
-      <Image src={session.user.image} width={100} height={100} alt="User Avatar" />
+      <Image
+        className="rounded-full"
+        src={session.user.image} width={40} height={40} alt="User Avatar" />
     </div>
   )
 }
