@@ -28,7 +28,6 @@ export default async function Page() {
         <Separator orientation="vertical" className="bg-gray-500 mx-2" />
         <div className="flex flex-col w-full">
           <CreateTodoBar />
-          <Separator className="bg-gray-500 my-2" />
           <DisplayTodos />
         </div>
       </div>

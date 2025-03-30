@@ -1,9 +1,8 @@
 'use server';
 
 import { PrismaClient } from "@prisma/client";
+import { prisma } from "../../prisma";
 import { auth } from "../../auth";
-
-const prisma = new PrismaClient();
 
 export async function createPost(formData: FormData) {
   const title = formData.get('title') as string;

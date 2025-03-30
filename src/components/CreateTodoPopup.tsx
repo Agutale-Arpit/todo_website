@@ -12,12 +12,14 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { createPost } from "@/lib/actions";
 import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
+import { Textarea } from "./ui/textarea";
 
 export function CreateTodoPopup() {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="outline">Edit Profile</Button>
+        <div className="w-2/6 border-2 rounded-lg border-gray-400 bg-gray-600 px-4 py-3 drop-shadow-2xl font-semibold">Take a note...</div>
+        {/* <Button variant="outline">Edit Profile</Button> */}
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <VisuallyHidden>
@@ -26,22 +28,19 @@ export function CreateTodoPopup() {
 
         <form action={createPost} className="grid gap-4 py-4">
           <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="title" className="text-right">Title</Label>
-            <Input id="title" name="title" placeholder="Enter title" className="col-span-3" />
+            <Input id="title" name="title" placeholder="Enter title" className="col-span-4 border border-white" />
           </div>
 
           <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="content" className="text-right">Content</Label>
-            <Input id="description" name="description" placeholder="Enter content" className="col-span-3" />
+            <Textarea id="description" name="description" placeholder="Take a note..." className="col-span-4 border border-white" />
           </div>
 
           <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="category" className="text-right">Category</Label>
-            <Input id="category" name="category" placeholder="Enter category" className="col-span-3" />
+            <Input id="category" name="category" placeholder="Enter category" className="col-span-4 border border-white" />
           </div>
 
           <DialogFooter>
-            <Button type="submit">Save changes</Button>
+            <Button type="submit" className="bg-gray-200">Save</Button>
           </DialogFooter>
         </form>
 
