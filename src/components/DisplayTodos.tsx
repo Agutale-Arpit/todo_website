@@ -8,7 +8,8 @@ import { Label } from "./ui/label";
 import { Input } from "./ui/input";
 import DeleteButton from "./DeleteButton";
 import { Textarea } from "./ui/textarea";
-import { Separator } from "./ui/separator";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuLabel, DropdownMenuRadioGroup, DropdownMenuRadioItem, DropdownMenuSeparator, DropdownMenuTrigger } from "./ui/dropdown-menu";
+import { useState } from "react";
 
 const session = await auth();
 
@@ -55,9 +56,8 @@ export default async function DisplayTodos() {
                   <Textarea id="description" defaultValue={post.description} name="description" placeholder="Enter content" className="col-span-4" />
                 </div>
 
-
                 <div className="grid grid-cols-4 items-center gap-4">
-                  <Input id="category" defaultValue={post.category} name="category" placeholder="Enter category" className="col-span-4 border border-white" />
+                  <Input id="category" defaultValue={post.category} name="category" placeholder="Enter category" className="col-span-4" />
                 </div>
 
                 <DialogFooter className="flex">
