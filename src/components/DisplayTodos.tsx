@@ -10,6 +10,7 @@ import DeleteButton from "./DeleteButton";
 import { Textarea } from "./ui/textarea";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuLabel, DropdownMenuRadioGroup, DropdownMenuRadioItem, DropdownMenuSeparator, DropdownMenuTrigger } from "./ui/dropdown-menu";
 import { useState } from "react";
+import { inter, lusitana } from "./fonts";
 
 const session = await auth();
 
@@ -22,12 +23,12 @@ export default async function DisplayTodos() {
   })
 
   return (
-    <div className="h-5/6">
+    <div className={`${inter.className} mx-8 h-5/6`}>
       <div className="grid grid-cols-5">
         {data.map((post) => (
           <Dialog key={post.id}>
             <DialogTrigger asChild>
-              <div className="flex flex-col justify-between bg-amber-900 m-2 p-2 rounded-lg" >
+              <div className="flex flex-col justify-between bg-amber-900 m-4 p-2 rounded-lg min-h-5/6" >
                 <div>
                   <div className="text-lg font-semibold">
                     {post.title}
@@ -36,7 +37,7 @@ export default async function DisplayTodos() {
                     {post.description}
                   </div>
                 </div>
-                <div className="inline-block w-fit bg-amber-700 rounded-sm px-2 py-0.5">
+                <div className="inline-block w-fit bg-amber-700 rounded-sm px-2 mt-4">
                   {post.category}
                 </div>
               </div>
