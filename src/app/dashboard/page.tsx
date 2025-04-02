@@ -9,6 +9,7 @@ import Sidebar from "@/components/Sidebar";
 import CreateTodoBar from "@/components/CreateTodoBar";
 import DisplayTodos from "@/components/DisplayTodos";
 import { Separator } from "@/components/ui/separator";
+import { fetchTodos } from "@/lib/actions";
 
 export default async function Page() {
   const session = await auth()
@@ -16,6 +17,8 @@ export default async function Page() {
   if (!session?.user) {
     redirect('/')
   }
+
+  const todos = await fetchTodos();
 
   return (
     <div className="h-screen bg-[#1b1b1b]">
@@ -28,7 +31,7 @@ export default async function Page() {
         <Separator orientation="vertical" className="bg-gray-500 mx-2" />
         <div className="flex flex-col w-full">
           <CreateTodoBar />
-          <DisplayTodos />
+          <DisplayTodos todos={todos} />
         </div>
       </div>
       <div>

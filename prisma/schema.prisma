@@ -80,7 +80,13 @@ model Todos {
   id              String  @id @default(cuid())
   title           String
   description     String
-  category        String
+  category        Category
   userId          String
   user            User @relation(fields: [userId], references: [id])
+}
+
+enum Category {
+  DSA
+  Projects
+  Learning
 }

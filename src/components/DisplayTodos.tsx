@@ -1,31 +1,36 @@
+"use client";
+
 import { prisma } from "../../prisma";
 import { auth } from "../../auth";
 import { Dialog, DialogContent, DialogFooter, DialogTitle, DialogTrigger } from "./ui/dialog";
 import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 import { Button } from "./ui/button";
-import { createPost, deletePost, updatePost } from "@/lib/actions";
-import { Label } from "./ui/label";
+import { createPost, deletePost, fetchTodos, updatePost } from "@/lib/actions";
 import { Input } from "./ui/input";
 import DeleteButton from "./DeleteButton";
 import { Textarea } from "./ui/textarea";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuLabel, DropdownMenuRadioGroup, DropdownMenuRadioItem, DropdownMenuSeparator, DropdownMenuTrigger } from "./ui/dropdown-menu";
+import { inter } from "./fonts";
+import { CategoryDropdown } from "./CategoryDropdown";
 import { useState } from "react";
-import { inter, lusitana } from "./fonts";
 
-const session = await auth();
+type Todo = {
+  id: string;
+  title: string;
+  description: string;
+  category: string;
+};
+type Props = {
+  todos: Todo[];
+}
 
-export default async function DisplayTodos() {
+export default function DisplayTodos({ todos = [] }: Props) {
 
-  const data = await prisma.todos.findMany({
-    where: {
-      userId: session?.user?.id,
-    }
-  })
+  const [category, setCategory] = useState("");
 
   return (
     <div className={`${inter.className} mx-8 h-5/6`}>
       <div className="grid grid-cols-5">
-        {data.map((post) => (
+        {todos.map((post) => (
           <Dialog key={post.id}>
             <DialogTrigger asChild>
               <div className="flex flex-col justify-between bg-amber-900 m-4 p-2 rounded-lg min-h-5/6" >
@@ -57,9 +62,8 @@ export default async function DisplayTodos() {
                   <Textarea id="description" defaultValue={post.description} name="description" placeholder="Enter content" className="col-span-4" />
                 </div>
 
-                <div className="grid grid-cols-4 items-center gap-4">
-                  <Input id="category" defaultValue={post.category} name="category" placeholder="Enter category" className="col-span-4" />
-                </div>
+                <CategoryDropdown category={category} setCategory={setCategory} />
+                <input type="hidden" name="category" value={category} />
 
                 <DialogFooter className="flex">
                   <Button type="submit">Save changes</Button>

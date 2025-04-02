@@ -1,8 +1,6 @@
 "use client";
 
-import { useState } from "react";
 import { CreateTodoPopup } from "./CreateTodoPopup";
-import { Button } from "./ui/button";
 
 export default function CreateTodoBar() {
   return (

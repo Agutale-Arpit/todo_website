@@ -6,28 +6,30 @@ import { Button } from "@/components/ui/button"
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuLabel,
   DropdownMenuRadioGroup,
   DropdownMenuRadioItem,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 
-export function DropdownMenuRadioGroupDemo() {
-  const [position, setPosition] = React.useState("bottom")
+interface CategoryDropdownProps {
+  category: string;
+  setCategory: (value: string) => void;
+}
+
+export function CategoryDropdown({ category, setCategory }: CategoryDropdownProps) {
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="outline">Open</Button>
+        <Button variant="outline">
+          {category ? category : "Select Category"}
+        </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56">
-        <DropdownMenuLabel>Panel Position</DropdownMenuLabel>
-        <DropdownMenuSeparator />
-        <DropdownMenuRadioGroup value={position} onValueChange={setPosition}>
-          <DropdownMenuRadioItem value="top">Top</DropdownMenuRadioItem>
-          <DropdownMenuRadioItem value="bottom">Bottom</DropdownMenuRadioItem>
-          <DropdownMenuRadioItem value="right">Right</DropdownMenuRadioItem>
+        <DropdownMenuRadioGroup value={category} onValueChange={setCategory}>
+          <DropdownMenuRadioItem value="DSA">DSA</DropdownMenuRadioItem>
+          <DropdownMenuRadioItem value="Projects">Projects</DropdownMenuRadioItem>
+          <DropdownMenuRadioItem value="Learning">Learning</DropdownMenuRadioItem>
         </DropdownMenuRadioGroup>
       </DropdownMenuContent>
     </DropdownMenu>

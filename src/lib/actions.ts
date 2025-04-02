@@ -1,8 +1,15 @@
 'use server';
 
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient, Category } from "@prisma/client";
 import { prisma } from "../../prisma";
 import { auth } from "../../auth";
+
+export type Todo = {
+  id: string;
+  title: string;
+  description: string;
+  category: string;
+}
 
 export async function createPost(formData: FormData) {
   const title = formData.get('title') as string;
@@ -10,9 +17,10 @@ export async function createPost(formData: FormData) {
   const category = formData.get('category') as string;
 
   const session = await auth();
+
   const userId = session?.user?.id;
 
-  if (!title || !description || !category || !userId) {
+  if (!title || !description || !category || !userId || !(category in Category)) {
     return null;
   }
 
@@ -20,7 +28,7 @@ export async function createPost(formData: FormData) {
     data: {
       title: title,
       description: description,
-      category: category,
+      category: category as Category,
       userId
     }
   })
@@ -33,6 +41,7 @@ export async function updatePost(formData: FormData) {
   const id = formData.get('id') as string;
 
   const session = await auth();
+
   const userId = session?.user?.id;
 
   const updateUser = await prisma.todos.update({
@@ -42,7 +51,7 @@ export async function updatePost(formData: FormData) {
     data: {
       title: title,
       description: description,
-      category: category,
+      category: category as Category,
       userId
     }
   })
@@ -53,6 +62,21 @@ export async function deletePost(id: string) {
   await prisma.todos.delete({
     where: { id },
   });
+}
+
+export async function fetchTodos(): Promise<Todo[]> {
+
+  const session = await auth();
+  if (!session?.user?.id) {
+    return [];
+  }
+  const todos = await prisma.todos.findMany({
+    where: {
+      userId: session?.user?.id,
+    }
+  })
+
+  return todos;
 }
 
 
