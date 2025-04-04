@@ -64,15 +64,32 @@ export async function deletePost(id: string) {
   });
 }
 
-export async function fetchTodos(): Promise<Todo[]> {
+export async function fetchTodos(
+  query: string
+): Promise<Todo[]> {
 
   const session = await auth();
   if (!session?.user?.id) {
     return [];
   }
+  console.log("Search query:", query);
   const todos = await prisma.todos.findMany({
     where: {
       userId: session?.user?.id,
+      OR: [
+        {
+          title: {
+            contains: query,
+            mode: "insensitive"
+          }
+        },
+        {
+          description: {
+            contains: query,
+            mode: "insensitive"
+          }
+        },
+      ]
     }
   })
 

@@ -1,7 +1,5 @@
 "use client";
 
-import { prisma } from "../../prisma";
-import { auth } from "../../auth";
 import { Dialog, DialogContent, DialogFooter, DialogTitle, DialogTrigger } from "./ui/dialog";
 import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 import { Button } from "./ui/button";

@@ -1,9 +1,10 @@
-import { LucideNotebookPen, ScanSearchIcon, SearchIcon, SearchXIcon } from "lucide-react";
-import { auth } from "../../auth";
+import { FileSearchIcon, LucideNotebookPen, ScanSearchIcon, SearchIcon, SearchXIcon } from "lucide-react";
 import UserAvatar from "./UserAvatar";
+import { Input } from "./ui/input";
+import { DocumentMagnifyingGlassIcon, MagnifyingGlassIcon } from '@heroicons/react/24/outline';
+import Search from "./Search";
 
 export default function Navbar() {
-  const session = auth();
 
   return (
     <div className="mx-auto flex items-center justify-between w-full p-4">
@@ -13,10 +14,8 @@ export default function Navbar() {
           NOTES
         </div>
       </div>
-      <div className="flex rounded-md bg-gray-600 p-3 w-2/6 font-semibold">
-        <SearchIcon className="mx-2" />
-        Search notes ...
-      </div>
+      <Search placeholder="Search Notes..." />
+      <div></div>
       <div className="">
         <UserAvatar />
       </div>

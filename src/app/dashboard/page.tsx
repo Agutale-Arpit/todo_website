@@ -10,8 +10,15 @@ import CreateTodoBar from "@/components/CreateTodoBar";
 import DisplayTodos from "@/components/DisplayTodos";
 import { Separator } from "@/components/ui/separator";
 import { fetchTodos } from "@/lib/actions";
+import TodosList from "@/components/TodosList";
 
-export default async function Page() {
+export default async function Page(props: {
+  searchParams?: Promise<{
+    query?: string;
+  }>;
+}) {
+  const searchParams = await props.searchParams;
+  const query = searchParams?.query || '';
   const session = await auth()
 
   if (!session?.user) {
@@ -31,7 +38,8 @@ export default async function Page() {
         <Separator orientation="vertical" className="bg-gray-500 mx-2" />
         <div className="flex flex-col w-full">
           <CreateTodoBar />
-          <DisplayTodos todos={todos} />
+          <TodosList query={query} />
+          {/* <DisplayTodos todos={todos} /> */}
         </div>
       </div>
       <div>
