@@ -1,7 +1,5 @@
 import { FileSearchIcon, LucideNotebookPen, ScanSearchIcon, SearchIcon, SearchXIcon } from "lucide-react";
 import UserAvatar from "./UserAvatar";
-import { Input } from "./ui/input";
-import { DocumentMagnifyingGlassIcon, MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 import Search from "./Search";
 
 export default function Navbar() {

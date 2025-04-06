@@ -1,8 +1,9 @@
 'use server';
 
-import { PrismaClient, Category } from "@prisma/client";
+import { Prisma, PrismaClient, Category } from "@prisma/client";
 import { prisma } from "../../prisma";
 import { auth } from "../../auth";
+import { title } from "process";
 
 export type Todo = {
   id: string;
@@ -65,33 +66,41 @@ export async function deletePost(id: string) {
 }
 
 export async function fetchTodos(
-  query: string
+  query: string,
+  category: string
 ): Promise<Todo[]> {
 
   const session = await auth();
   if (!session?.user?.id) {
     return [];
   }
-  console.log("Search query:", query);
-  const todos = await prisma.todos.findMany({
-    where: {
-      userId: session?.user?.id,
-      OR: [
-        {
-          title: {
-            contains: query,
-            mode: "insensitive"
-          }
-        },
-        {
-          description: {
-            contains: query,
-            mode: "insensitive"
-          }
-        },
-      ]
-    }
-  })
+
+  const where: Prisma.TodosWhereInput = {
+    userId: session.user.id
+  };
+
+  if (Object.values(Category).includes(category as Category)) {
+    where.category = category as Category;
+  }
+
+  if (query) {
+    where.OR = [
+      {
+        title: {
+          contains: query,
+          mode: "insensitive"
+        }
+      },
+      {
+        description: {
+          contains: query,
+          mode: "insensitive"
+        }
+      }
+    ];
+  }
+
+  const todos = await prisma.todos.findMany({ where });
 
   return todos;
 }

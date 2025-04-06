@@ -3,11 +3,13 @@ import DisplayTodos from "./DisplayTodos";
 
 export default async function TodosList({
   query,
+  category
 }: {
-  query: string
+  query: string,
+  category: string
 }) {
   console.log(query);
-  const todos: Todo[] = await fetchTodos(query);
+  const todos: Todo[] = await fetchTodos(query, category);
 
   return <DisplayTodos todos={todos} />;
 }
