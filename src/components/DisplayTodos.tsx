@@ -27,11 +27,11 @@ export default function DisplayTodos({ todos = [] }: Props) {
 
   return (
     <div className={`${inter.className} mx-8 h-5/6`}>
-      <div className="grid grid-cols-5">
+      <div className="grid grid-cols-4 md:grid-cols-4 gap-4 mt-4">
         {todos.map((post) => (
           <Dialog key={post.id}>
             <DialogTrigger asChild>
-              <div className="flex flex-col justify-between bg-amber-900 m-4 p-2 rounded-lg min-h-5/6" >
+              <div className="flex flex-col justify-between h-auto bg-amber-900 p-3 m-0.5 rounded-lg" >
                 <div>
                   <div className="text-lg font-semibold">
                     {post.title}
@@ -40,7 +40,7 @@ export default function DisplayTodos({ todos = [] }: Props) {
                     {post.description}
                   </div>
                 </div>
-                <div className="inline-block w-fit bg-amber-700 rounded-sm px-2 mt-4">
+                <div className="inline-block w-fit h-fit bg-amber-700 text-sm text-white rounded-sm py-0.5 px-2 mt-4">
                   {post.category}
                 </div>
               </div>

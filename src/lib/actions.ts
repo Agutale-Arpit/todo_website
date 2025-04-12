@@ -1,9 +1,10 @@
-'use server';
+"use server";
 
 import { Prisma, PrismaClient, Category } from "@prisma/client";
 import { prisma } from "../../prisma";
 import { auth } from "../../auth";
 import { title } from "process";
+import { revalidatePath } from "next/cache";
 
 export type Todo = {
   id: string;
@@ -33,6 +34,8 @@ export async function createPost(formData: FormData) {
       userId
     }
   })
+
+  revalidatePath('/dashboard');
 }
 
 export async function updatePost(formData: FormData) {
@@ -56,6 +59,8 @@ export async function updatePost(formData: FormData) {
       userId
     }
   })
+
+  revalidatePath('/dashboard');
 }
 
 export async function deletePost(id: string) {
@@ -63,6 +68,8 @@ export async function deletePost(id: string) {
   await prisma.todos.delete({
     where: { id },
   });
+
+  revalidatePath('/dashboard');
 }
 
 export async function fetchTodos(

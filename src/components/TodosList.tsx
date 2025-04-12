@@ -8,7 +8,8 @@ export default async function TodosList({
   query: string,
   category: string
 }) {
-  console.log(query);
+
+  // console.log(query);
   const todos: Todo[] = await fetchTodos(query, category);
 
   return <DisplayTodos todos={todos} />;
